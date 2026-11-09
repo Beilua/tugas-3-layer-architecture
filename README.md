@@ -264,3 +264,16 @@ Sumber: `tabel/tabel-perbandingan-1.png` ← Excel `Table3_4a`.
 
 Sumber: `tabel/tabel-perbandingan-2.png` ← Excel `Table4_4b`.
 
+## Screenshot Tampilan
+
+### Versi 1-Layer
+
+![1-layer](screenshot/1-layer.png)
+
+Sumber: `tugas-3-layer-architecture/screenshot/1-layer.png`.
+
+### Versi 3-Layer
+
+![3-layer](screenshot/3-layer.png)
+
+Sumber: `tugas-3-layer-architecture/screenshot/3-layer.png`.
