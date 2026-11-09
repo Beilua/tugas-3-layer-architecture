@@ -1,0 +1,79 @@
+<mxfile host="app.diagrams.net" pages="2">
+  <diagram name="1-Layer" id="0">
+    <mxGraphModel dx="1505" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="U" parent="1" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#d5e8d4;strokeColor=#82b366;" value="User / Browser" vertex="1">
+          <mxGeometry height="60" width="120" x="390" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="A" parent="1" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;" value="app-1-layer/index.php — SEMUA JADI SATU FILE&lt;br/&gt;Tampilan: HTML + CSS + JS di file yang sama&lt;br/&gt;Bisnis: validasi nama/email/no_hp wajib, format email&lt;br/&gt;Data: mysqli_connect + query INSERT/UPDATE/DELETE/SELECT langsung" vertex="1">
+          <mxGeometry height="140" width="480" x="210" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="DB" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="MySQL&lt;br/&gt;db_customer.pelanggan" vertex="1">
+          <mxGeometry height="110" width="150" x="375" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="U" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;labelBackgroundColor=default;defaultLabelBackgroundColor=page;strokeColor=#A8201A;fontColor=default;" target="A" value="&lt;span&gt;GET / POST form (method=post, ?hapus=, ?edit=, ?cari=)&lt;/span&gt;">
+          <mxGeometry relative="1" x="0.25" y="10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="A" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;labelBackgroundColor=none;strokeColor=#A8201A;fontColor=default;" target="DB" value="mysqli_query / prepared stmt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="A" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;labelBackgroundColor=none;strokeColor=#A8201A;fontColor=default;" target="U" value="HTML render langsung">
+          <mxGeometry relative="1" x="0.25" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="3-Layer" id="1">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="U" value="User / Browser" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P" value="presentation/index.php + assets/app.js + assets/style.css&lt;br/&gt;PRESENTATION LAYER — HTML murni, CSS terpisah&lt;br/&gt;JS: fetch() REST API + render tabel&lt;br/&gt;TIDAK ada SQL, TIDAK ada validasi bisnis" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="150" width="520" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="B" value="business/api.php&lt;br/&gt;BUSINESS LAYER — Terima JSON, validasi aturan bisnis&lt;br/&gt;(wajib / format email / email &amp;amp; no_hp unik)&lt;br/&gt;HTTP status: 201/400/404/500/405 — TIDAK ada HTML" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="320" width="520" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="D" value="data/pelanggan.php + data/db.php&lt;br/&gt;DATA LAYER — buatKoneksi() + query CRUD&lt;br/&gt;(prepared stmt untuk INSERT/UPDATE/search)&lt;br/&gt;TIDAK tahu validasi bisnis" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="490" width="520" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="DB" value="MySQL&lt;br/&gt;db_customer.pelanggan" style="shape=cylinder3;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="660" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="buka halaman, klik, ketik" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;" edge="1" parent="1" source="U" target="P">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="REST API + JSON, fetch(../business/api.php), GET/POST/PUT/DELETE" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;" edge="1" parent="1" source="P" target="B">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="panggil fungsi CRUD" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;" edge="1" parent="1" source="B" target="D">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="mysqli" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;" edge="1" parent="1" source="D" target="DB">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="row / result set" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;" edge="1" parent="1" source="DB" target="D">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="data bersih" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;" edge="1" parent="1" source="D" target="B">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="JSON {status, pesan, data}" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;" edge="1" parent="1" source="B" target="P">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="render tabel/notif" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;" edge="1" parent="1" source="P" target="U">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -4,8 +4,10 @@
    SVG icons inline — no emoji, no external icon library.
    ================================================================ */
 
+/* muat font teks utama aplikasi */
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap');
 
+/* simpan variabel warna dan bentuk */
 :root {
   --forest: #1b6b2e;
   --forest-dark: #104720;
@@ -29,8 +31,11 @@
   --shadow-card: 0 12px 34px rgba(28, 36, 32, 0.08);
 }
 
+/* atur jarak halaman keseluruhan */
 * { box-sizing: border-box; }
+/* atur geser halus antar bagian */
 html { scroll-behavior: smooth; }
+/* atur gaya dasar isi halaman */
 body {
   font-family: 'Raleway', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 17px;
@@ -112,10 +117,10 @@ body {
   66% { transform: translate(-20px, 30px) scale(0.94) rotate(-3deg); }
 }
 
-/* ---- Header: cornered to top, full screen width ---- */
+/* ---- Header: full screen width, mesh glow fading into background ---- */
 .header {
   width: 100%;
-  padding: 36px 4vw 44px;
+  padding: 40px 4vw 90px;
   color: #fff;
   text-align: center;
   position: relative;
@@ -125,8 +130,13 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--forest) 0%, var(--forest-dark) 48%, #0a2e18 100%);
+  background:
+    radial-gradient(560px 320px at 18% 0%, rgba(191, 227, 238, 0.22), transparent 60%),
+    radial-gradient(520px 300px at 88% 100%, rgba(201, 138, 86, 0.28), transparent 60%),
+    linear-gradient(135deg, var(--forest) 0%, var(--forest-dark) 48%, #0a2e18 100%);
   z-index: 0;
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
 }
 .header-deco {
   position: absolute;
@@ -145,13 +155,53 @@ body {
   border-radius: var(--radius-organic);
 }
 .header > * { position: relative; z-index: 1; }
+.header .eyebrow {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 6px 14px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sky-soft);
+}
+.header a.eyebrow {
+  text-decoration: none;
+  font-family: 'Raleway', sans-serif;
+  background: rgba(191, 227, 238, 0.12);
+  border: 1px solid rgba(191, 227, 238, 0.35);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
+}
+.header a.eyebrow:hover {
+  background: rgba(191, 227, 238, 0.24);
+  border-color: rgba(191, 227, 238, 0.7);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.header a.eyebrow:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
 .header h1 {
   font-family: 'Lora', serif;
-  margin: 0 0 6px;
-  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  margin: 0 0 10px;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
   font-weight: 700;
-  letter-spacing: 0.3px;
-  line-height: 1.15;
+  letter-spacing: 0.2px;
+  line-height: 1.08;
+  text-wrap: balance;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
+}
+.header h1 .accent { color: #f3d9b0; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .header h1 .accent {
+    background: linear-gradient(92deg, #f7e8c9 0%, #e6bd83 45%, #c98a56 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 .header .lead {
   margin: 0 auto;
@@ -160,17 +210,27 @@ body {
   color: rgba(255, 255, 255, 0.9);
   font-weight: 400;
 }
-
-/* Leaf badge (header) — inline with the title, as tall as the title text */
-.leaf-badge {
-  width: 0.85em; height: 0.85em;
-  vertical-align: -0.08em;
-  margin-right: 10px;
-  animation: sway 5s ease-in-out infinite;
+.header-rule {
+  display: block;
+  width: min(160px, 40vw);
+  height: 4px;
+  margin: 18px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--earth-soft), var(--sky-soft), transparent);
+  opacity: 0.85;
 }
-@keyframes sway {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-12px) rotate(4deg); }
+
+/* Leaf badge (header) — decorative ghost mark beside the title: faded out and gently breathing */
+.leaf-badge {
+  width: 0.55em; height: 0.55em;
+  vertical-align: -0.02em;
+  margin-right: 10px;
+  opacity: 0.35;
+  animation: fade-breathe 6s ease-in-out infinite;
+}
+@keyframes fade-breathe {
+  0%, 100% { opacity: 0.22; }
+  50% { opacity: 0.45; }
 }
 
 /* ---- Full-width grid: cards span full width, no side boxing ---- */
@@ -187,6 +247,7 @@ body {
 
 /* ---- Glassmorphism organic cards ---- */
 .card {
+  padding: 20px;
   position: relative;
   background: linear-gradient(145deg, #ffffff 0%, #fcfaf2 100%);
   border: 1px solid var(--border);
@@ -224,7 +285,6 @@ body {
   gap: 10px;
 }
 .card h2 svg { width: 22px; height: 22px; flex-shrink: 0; }
-.pesan svg { width: 20px; height: 20px; flex-shrink: 0; }
 .section-lead {
   font-size: 0.95rem;
   color: var(--muted);
@@ -237,7 +297,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 30px 28px;
+  padding: 30px 10px;
 }
 label {
   display: flex;
@@ -280,6 +340,11 @@ input:focus-visible, textarea:focus-visible {
 .btn {
   flex: 1;
   min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
   font: inherit;
   font-family: 'Raleway', sans-serif;
   font-weight: 800;
@@ -313,22 +378,60 @@ input:focus-visible, textarea:focus-visible {
 }
 .btn[hidden] { display: none !important; }
 
-/* ---- Status banner ---- */
-.pesan {
-  margin: 0 0 26px;
-  padding: 16px 20px;
-  border-radius: var(--radius-input);
-  border-left: 7px solid var(--forest);
-  background: var(--forest-mist);
+/* ---- Notifikasi (KDE Plasma-style, pojok kanan atas) ---- */
+.notif {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  width: min(360px, calc(100vw - 32px));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px 14px 16px;
+  border-radius: 18px;
+  border-left: 6px solid var(--forest);
+  background: linear-gradient(145deg, #ffffff 0%, #fcfaf2 100%);
+  box-shadow: 0 16px 40px rgba(28, 36, 32, 0.22);
   color: var(--forest-dark);
   font-weight: 800;
   font-family: 'Lora', serif;
   font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  line-height: 1.4;
 }
-.pesan.error { border-left-color: #991b1b; background: #fef3f2; color: #7f1d1d; }
+.notif[hidden] { display: none; }
+.notif.error { border-left-color: #991b1b; color: #7f1d1d; }
+.notif__ikon { flex-shrink: 0; display: inline-flex; color: var(--forest); }
+.notif.error .notif__ikon { color: #991b1b; }
+.notif__ikon svg { width: 22px; height: 22px; }
+.notif__teks { flex: 1; min-width: 0; }
+.notif__tutup {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; border-radius: 10px;
+  background: rgba(28, 36, 32, 0.06);
+  color: var(--ink);
+  font-size: 20px; line-height: 1; cursor: pointer;
+}
+.notif__tutup:hover { background: rgba(28, 36, 32, 0.14); }
+.notif--masuk { animation: notif-masuk 350ms cubic-bezier(0.18, 0.89, 0.32, 1.28) both; }
+@keyframes notif-masuk {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ---- Pencarian (di bawah "Daftar Pelanggan", di atas tabel) ---- */
+.pencarian {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 0 0 16px;
+  margin-bottom: 16px;
+}
+.pencarian input { flex: 1 1 220px; margin: 0; }
+.pencarian .btn { flex: 0 0 auto; padding: 0 24px; }
 
 /* ---- Table: headings centered, wider gap above ---- */
 .table-wrap {
@@ -378,7 +481,7 @@ td a:hover { color: var(--earth); background: rgba(139, 69, 19, 0.08); text-deco
 /* ---- Responsive ---- */
 @media (max-width: 900px) {
   .app { padding: 0 0 80px 0; }
-  .header { padding: 28px 4vw 36px; }
+  .header { padding: 28px 4vw 64px; }
   .grid { gap: 30px; padding: 0 4vw; margin-top: 24px; }
   .actions { flex-direction: column; }
 }

@@ -1,0 +1,37 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="3-Layer (teks)" id="0">
+    <mxGraphModel dx="1643" dy="720" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="U" parent="1" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#d5e8d4;strokeColor=#82b366;" value="User" vertex="1">
+          <mxGeometry height="60" width="120" x="390" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="P" parent="1" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;" value="LAYER 1 — PRESENTATION (presentation/index.php, assets/app.js, style.css)&lt;br/&gt;HTML + CSS + JS. fetch() ke API. Tidak ada SQL." vertex="1">
+          <mxGeometry height="90" width="700" x="100" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="B" parent="1" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;" value="LAYER 2 — BUSINESS (business/api.php)&lt;br/&gt;Validasi: wajib diisi, format email, unik email/no_hp. Kirim JSON.&lt;br/&gt;Status: 200 OK / 201 Created / 400 Bad Request / 404 Not Found / 500 / 405" vertex="1">
+          <mxGeometry height="110" width="700" x="100" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="D" parent="1" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;" value="LAYER 3 — DATA (data/db.php, data/pelanggan.php)&lt;br/&gt;buatKoneksi() + tambah/ambil/edit/hapus + cek unik. Query SQL di sini." vertex="1">
+          <mxGeometry height="90" width="700" x="100" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="DB" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="MySQL&lt;br&gt;db_customer" vertex="1">
+          <mxGeometry height="110" width="120" x="390" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="U" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;labelBackgroundColor=none;strokeColor=#A8201A;fontColor=default;" target="P" value="1. buka halaman">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="P" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;labelBackgroundColor=none;strokeColor=#A8201A;fontColor=default;" target="B" value="2. REST API + JSON (fetch): GET business/api.php, POST {nama,email,no_hp,alamat}, PUT {id,nama,email,no_hp,alamat}, DELETE {id} / ?id=">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="B" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;labelBackgroundColor=none;strokeColor=#A8201A;fontColor=default;" target="D" value="3. panggil fungsi CRUD">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="D" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;labelBackgroundColor=none;strokeColor=#A8201A;fontColor=default;" target="DB" value="4. mysqli / prepared statement">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
